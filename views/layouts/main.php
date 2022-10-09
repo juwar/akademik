@@ -40,8 +40,11 @@ $this->registerLinkTag(['rel' => 'icon', 'type' => 'image/x-icon', 'href' => '@w
         'options' => ['class' => 'navbar-nav'],
         'items' => [
             ['label' => 'Home', 'url' => ['/site/index']],
-            ['label' => 'About', 'url' => ['/site/about']],
-            ['label' => 'Contact', 'url' => ['/site/contact']],
+            ['label' => 'Mahasiswa', 'url' => ['/mahasiswa/index']],
+            ['label' => 'Mata Kuliah', 'url' => ['/mata-kuliah/index']],
+            ['label' => 'Kecakapan', 'url' => ['/kecakapan/index']],
+            ['label' => 'Nilai', 'url' => ['/nilai/index']],
+            ['label' => 'Refleksi', 'url' => ['/refleksi/index']],
             Yii::$app->user->isGuest
                 ? ['label' => 'Login', 'url' => ['/site/login']]
                 : '<li class="nav-item">'
