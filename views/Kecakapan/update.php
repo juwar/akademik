@@ -24,15 +24,15 @@ $dataList=ArrayHelper::map(MataKuliah::find()->asArray()->all(), 'kode', 'nama')
 
     <?php $form = ActiveForm::begin(); ?>
 
-    <?= $form->field($model, 'id_kecakapan') ?>
-    <?= $form->field($model, 'kode_matkul')->dropDownList($dataList, 
-         ['prompt'=>'- Mata Kuliah -']) ?>
-    <?= $form->field($model, 'type_kecakapan') ?>
+        <?= $form->field($model, 'id_kecakapan') ?>
+        <?= $form->field($model, 'kode_matkul')->dropDownList($dataList, 
+            ['prompt'=>'- Mata Kuliah -']) ?>
+        <?= $form->field($model, 'type_kecakapan') ?>
 
 
-    <div class="form-group">
-        <?= Html::submitButton('Submit', ['class' => 'btn btn-primary']) ?>
-    </div>
+        <div class="form-group">
+            <?= Html::submitButton('Submit', ['class' => 'btn btn-primary']) ?>
+        </div>
 
     <?php ActiveForm::end(); ?>
 

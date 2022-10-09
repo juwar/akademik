@@ -3,6 +3,8 @@
 namespace app\models;
 
 use Yii;
+use app\models\MataKuliah;
+use app\models\Mahasiswa;
 
 /**
  * This is the model class for table "nilai".
@@ -60,5 +62,21 @@ class Nilai extends \yii\db\ActiveRecord
     public static function find()
     {
         return new NilaiQuery(get_called_class());
+    }
+
+    public function getMataKuliah(){
+        return $this->hasOne(MataKuliah::className(), ['kode' => 'kode_matkul']);
+    }
+
+    public function getMatkul(){
+        return $this->mataKuliah->nama; 
+    }
+
+    public function getMahasiswa(){
+        return $this->hasOne(Mahasiswa::className(), ['nim' => 'nim']);
+    }
+
+    public function getUsername(){
+        return $this->mahasiswa->nama; 
     }
 }

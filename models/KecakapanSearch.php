@@ -51,8 +51,8 @@ class KecakapanSearch extends Kecakapan
         ]);
 
         $dataProvider->sort->attributes['matkul'] = [
-            'asc' => ['matkul' => SORT_ASC],
-            'desc' => ['matkul' => SORT_DESC],
+            'asc' => ['mata_kuliah.nama' => SORT_ASC],
+            'desc' => ['mata_kuliah.nama' => SORT_DESC],
         ];
 
         $this->load($params);

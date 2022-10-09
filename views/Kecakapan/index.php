@@ -7,10 +7,11 @@ use yii\grid\ActionColumn;
 use yii\grid\GridView;
 
 /** @var yii\web\View $this */
+/** @var app\models\Kecakapan $model */
 /** @var app\models\KecakapanSearch $searchModel */
 /** @var yii\data\ActiveDataProvider $dataProvider */
 
-$this->title = 'Kecakapans';
+$this->title = 'Kecakapan';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="kecakapan-index">
@@ -29,9 +30,18 @@ $this->params['breadcrumbs'][] = $this->title;
         'columns' => [
             ['class' => 'yii\grid\SerialColumn'],
 
-            'id_kecakapan',
-            'matkul',
-            'type_kecakapan',
+            [                                                  
+                'label' => 'ID',
+                'attribute' => 'id_kecakapan',            
+            ],
+            [                                                  
+                'label' => 'Mata Kuliah',
+                'attribute' => 'matkul',            
+            ],
+            [                                                  
+                'label' => 'Kecakapan',
+                'attribute' => 'type_kecakapan',            
+            ],
             [
                 'class' => ActionColumn::className(),
                 'urlCreator' => function ($action, Kecakapan $model, $key, $index, $column) {
