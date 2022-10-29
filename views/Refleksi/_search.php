@@ -17,7 +17,7 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'id_refleksi') ?>
 
-    <?= $form->field($model, 'id_nilai') ?>
+    <?= $form->field($model, 'nim') ?>
 
     <?= $form->field($model, 'id_kecakapan') ?>
 

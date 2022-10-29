@@ -14,7 +14,7 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'id_refleksi')->textInput() ?>
 
-    <?= $form->field($model, 'id_nilai')->textInput() ?>
+    <?= $form->field($model, 'nim')->textInput(['maxlength' => true]) ?>
 
     <?= $form->field($model, 'id_kecakapan')->textInput(['maxlength' => true]) ?>
 
