@@ -2,16 +2,16 @@
 
 namespace app\controllers;
 
-use app\models\MataKuliah;
-use app\models\MataKuliahSearch;
+use app\models\KecakapanSiswa;
+use app\models\KecakapanSiswaSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 
 /**
- * MataKuliahController implements the CRUD actions for MataKuliah model.
+ * KecakapanSiswaController implements the CRUD actions for KecakapanSiswa model.
  */
-class MataKuliahController extends Controller
+class KecakapanSiswaController extends Controller
 {
     /**
      * @inheritDoc
@@ -32,13 +32,13 @@ class MataKuliahController extends Controller
     }
 
     /**
-     * Lists all MataKuliah models.
+     * Lists all KecakapanSiswa models.
      *
      * @return string
      */
     public function actionIndex()
     {
-        $searchModel = new MataKuliahSearch();
+        $searchModel = new KecakapanSiswaSearch();
         $dataProvider = $searchModel->search($this->request->queryParams);
 
         return $this->render('index', [
@@ -48,30 +48,30 @@ class MataKuliahController extends Controller
     }
 
     /**
-     * Displays a single MataKuliah model.
-     * @param string $kode Kode
+     * Displays a single KecakapanSiswa model.
+     * @param string $id ID
      * @return string
      * @throws NotFoundHttpException if the model cannot be found
      */
-    public function actionView($kode)
+    public function actionView($id)
     {
         return $this->render('view', [
-            'model' => $this->findModel($kode),
+            'model' => $this->findModel($id),
         ]);
     }
 
     /**
-     * Creates a new MataKuliah model.
+     * Creates a new KecakapanSiswa model.
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return string|\yii\web\Response
      */
     public function actionCreate()
     {
-        $model = new MataKuliah();
+        $model = new KecakapanSiswa();
 
         if ($this->request->isPost) {
-            $newId = strtoupper(substr(uniqid('MK-'),0, 10));
-            $model->kode = $newId;
+            $newId = strtoupper(substr(uniqid('KS-'),0, 10));
+            $model->id = $newId;
             if ($model->load($this->request->post()) && $model->save()) {
                 return $this->redirect(['index']);
             }
@@ -85,18 +85,18 @@ class MataKuliahController extends Controller
     }
 
     /**
-     * Updates an existing MataKuliah model.
+     * Updates an existing KecakapanSiswa model.
      * If update is successful, the browser will be redirected to the 'view' page.
-     * @param string $kode Kode
+     * @param string $id ID
      * @return string|\yii\web\Response
      * @throws NotFoundHttpException if the model cannot be found
      */
-    public function actionUpdate($kode)
+    public function actionUpdate($id)
     {
-        $model = $this->findModel($kode);
+        $model = $this->findModel($id);
 
         if ($this->request->isPost && $model->load($this->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'kode' => $model->kode]);
+            return $this->redirect(['view', 'id' => $model->id]);
         }
 
         return $this->render('update', [
@@ -105,29 +105,29 @@ class MataKuliahController extends Controller
     }
 
     /**
-     * Deletes an existing MataKuliah model.
+     * Deletes an existing KecakapanSiswa model.
      * If deletion is successful, the browser will be redirected to the 'index' page.
-     * @param string $kode Kode
+     * @param string $id ID
      * @return \yii\web\Response
      * @throws NotFoundHttpException if the model cannot be found
      */
-    public function actionDelete($kode)
+    public function actionDelete($id)
     {
-        $this->findModel($kode)->delete();
+        $this->findModel($id)->delete();
 
         return $this->redirect(['index']);
     }
 
     /**
-     * Finds the MataKuliah model based on its primary key value.
+     * Finds the KecakapanSiswa model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.
-     * @param string $kode Kode
-     * @return MataKuliah the loaded model
+     * @param string $id ID
+     * @return KecakapanSiswa the loaded model
      * @throws NotFoundHttpException if the model cannot be found
      */
-    protected function findModel($kode)
+    protected function findModel($id)
     {
-        if (($model = MataKuliah::findOne(['kode' => $kode])) !== null) {
+        if (($model = KecakapanSiswa::findOne(['id' => $id])) !== null) {
             return $model;
         }
 

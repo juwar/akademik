@@ -4,23 +4,20 @@ namespace app\models;
 
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
-use app\models\Nilai;
+use app\models\KecakapanSiswa;
 
 /**
- * NilaiSearch represents the model behind the search form of `app\models\Nilai`.
+ * KecakapanSiswaSearch represents the model behind the search form of `app\models\KecakapanSiswa`.
  */
-class NilaiSearch extends Nilai
+class KecakapanSiswaSearch extends KecakapanSiswa
 {
     /**
      * {@inheritdoc}
      */
-    public $matkul;
-    public $username;
     public function rules()
     {
         return [
-            [['id_nilai', 'semester', 'bobot_nilai'], 'integer'],
-            [['nim', 'kode_matkul', 'nilai', 'matkul', 'username'], 'safe'],
+            [['id', 'id_kecakapan', 'nim'], 'safe'],
         ];
     }
 
@@ -42,21 +39,21 @@ class NilaiSearch extends Nilai
      */
     public function search($params)
     {
-        $query = Nilai::find();
+        $query = KecakapanSiswa::find();
 
         // add conditions that should always apply here
-        $query->joinWith(['mataKuliah']);
-        $query->joinWith(['mahasiswa']);
+        $query->joinWith(['dataKecakapan']);
+        $query->joinWith(['dataMahasiswa']);
 
         $dataProvider = new ActiveDataProvider([
             'query' => $query,
         ]);
 
-        $dataProvider->sort->attributes['matkul'] = [
-            'asc' => ['mata_kuliah.nama' => SORT_ASC],
-            'desc' => ['mata_kuliah.nama' => SORT_DESC],
+        $dataProvider->sort->attributes['kecakapan'] = [
+            'asc' => ['kecakapan.type_kecakapan' => SORT_ASC],
+            'desc' => ['kecakapan.type_kecakapan' => SORT_DESC],
         ];
-        $dataProvider->sort->attributes['username'] = [
+        $dataProvider->sort->attributes['mahasiswa'] = [
             'asc' => ['mahasiswa.nama' => SORT_ASC],
             'desc' => ['mahasiswa.nama' => SORT_DESC],
         ];
@@ -70,17 +67,11 @@ class NilaiSearch extends Nilai
         }
 
         // grid filtering conditions
-        $query->andFilterWhere([
-            'id_nilai' => $this->id_nilai,
-            'semester' => $this->semester,
-            'bobot_nilai' => $this->bobot_nilai,
-        ]);
-
-        $query->andFilterWhere(['like', 'nim', $this->nim])
-            ->andFilterWhere(['like', 'kode_matkul', $this->kode_matkul])
-            ->andFilterWhere(['like', 'mata_kuliah.nama', $this->matkul])
-            ->andFilterWhere(['like', 'mahasiswa.nama', $this->username])
-            ->andFilterWhere(['like', 'nilai', $this->nilai]);
+        $query->andFilterWhere(['like', 'id', $this->id])
+            ->andFilterWhere(['like', 'id_kecakapan', $this->id_kecakapan])
+            ->andFilterWhere(['like', 'nim', $this->nim])
+            ->andFilterWhere(['like', 'kecakapan.type_kecakapan', $this->kecakapan])
+            ->andFilterWhere(['like', 'mahasiswa.nama', $this->mahasiswa]);
 
         return $dataProvider;
     }

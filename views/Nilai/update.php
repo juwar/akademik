@@ -18,8 +18,8 @@ $form = ActiveForm::begin([
     'id' => 'login-form',
     'options' => ['class' => 'form-horizontal'],
 ]);
-$dataList=ArrayHelper::map(MataKuliah::find()->asArray()->all(), 'kode', 'nama');
-$dataListNim=ArrayHelper::map(Mahasiswa::find()->asArray()->all(), 'nim', 'nim');
+$dataList = ArrayHelper::map(MataKuliah::find()->asArray()->all(), 'kode', 'nama');
+$dataListNim = ArrayHelper::map(Mahasiswa::find()->asArray()->all(), 'nim', 'nim');
 ?>
 <div class="nilai-update">
 
@@ -27,18 +27,23 @@ $dataListNim=ArrayHelper::map(Mahasiswa::find()->asArray()->all(), 'nim', 'nim')
 
     <?php $form = ActiveForm::begin(); ?>
 
-        <?= $form->field($model, 'nim')->dropDownList($dataListNim, 
-            ['prompt'=>'- NIM -']) ?>
-        <?= $form->field($model, 'kode_matkul')->dropDownList($dataList, 
-            ['prompt'=>'- Mata Kuliah -']) ?>
-        <?= $form->field($model, 'semester') ?>
-        <?= $form->field($model, 'nilai') ?>
-        <?= $form->field($model, 'bobot_nilai') ?>
+    <?= $form->field($model, 'id_nilai')->textInput(['disabled' => true]) ?>
+    <?= $form->field($model, 'nim')->dropDownList(
+        $dataListNim,
+        ['prompt' => '- NIM -']
+    ) ?>
+    <?= $form->field($model, 'kode_matkul')->dropDownList(
+        $dataList,
+        ['prompt' => '- Mata Kuliah -']
+    ) ?>
+    <?= $form->field($model, 'semester') ?>
+    <?= $form->field($model, 'nilai') ?>
+    <?= $form->field($model, 'bobot_nilai') ?>
 
 
-        <div class="form-group">
-            <?= Html::submitButton('Submit', ['class' => 'btn btn-primary']) ?>
-        </div>
+    <div class="form-group">
+        <?= Html::submitButton('Submit', ['class' => 'btn btn-primary mt-4']) ?>
+    </div>
 
     <?php ActiveForm::end(); ?>
 

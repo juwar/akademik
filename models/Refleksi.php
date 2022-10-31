@@ -3,15 +3,13 @@
 namespace app\models;
 
 use Yii;
-use app\models\Kecakapan;
 use app\models\Mahasiswa;
 
 /**
  * This is the model class for table "refleksi".
  *
- * @property int $id_refleksi
+ * @property string $id_refleksi
  * @property string $nim
- * @property string $id_kecakapan
  * @property string $refleksi_pembimbing
  */
 class Refleksi extends \yii\db\ActiveRecord
@@ -30,10 +28,9 @@ class Refleksi extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['id_refleksi', 'nim', 'id_kecakapan', 'refleksi_pembimbing'], 'required'],
-            [['id_refleksi'], 'integer'],
+            [['id_refleksi', 'nim', 'refleksi_pembimbing'], 'required'],
+            [['id_refleksi'], 'string', 'max' => 10],
             [['nim'], 'string', 'max' => 20],
-            [['id_kecakapan'], 'string', 'max' => 10],
             [['refleksi_pembimbing'], 'string', 'max' => 500],
             [['id_refleksi'], 'unique'],
         ];
@@ -47,7 +44,6 @@ class Refleksi extends \yii\db\ActiveRecord
         return [
             'id_refleksi' => 'Id Refleksi',
             'nim' => 'Nim',
-            'id_kecakapan' => 'Id Kecakapan',
             'refleksi_pembimbing' => 'Refleksi Pembimbing',
         ];
     }
@@ -61,21 +57,11 @@ class Refleksi extends \yii\db\ActiveRecord
         return new RefleksiQuery(get_called_class());
     }
 
-    public function getDataKecakapan(){
-        return $this->hasOne(Kecakapan::className(), ['id_kecakapan' => 'id_kecakapan']);
-    }
-
-    public function getKecakapan(){
-        // var_dump($this->dataKecakapan);die;
-        return "A";
-    }
-
-    public function getMahasiswa(){
+    public function getDataMahasiswa(){
         return $this->hasOne(Mahasiswa::className(), ['nim' => 'nim']);
     }
 
-    public function getUsername(){
-        var_dump($this->mahasiswa);die;
-        return $this->mahasiswa->nama; 
+    public function getMahasiswa(){
+        return $this->dataMahasiswa->nama;
     }
 }

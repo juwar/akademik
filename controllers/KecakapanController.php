@@ -70,8 +70,10 @@ class KecakapanController extends Controller
         $model = new Kecakapan();
 
         if ($this->request->isPost) {
+            $newId = strtoupper(substr(uniqid('KP'),0, 10));
+            $model->id_kecakapan = $newId;
             if ($model->load($this->request->post()) && $model->save()) {
-                return $this->redirect(['view', 'id_kecakapan' => $model->id_kecakapan]);
+                return $this->redirect(['index']);
             }
         } else {
             $model->loadDefaultValues();

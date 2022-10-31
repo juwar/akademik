@@ -15,7 +15,7 @@ $form = ActiveForm::begin([
     'id' => 'login-form',
     'options' => ['class' => 'form-horizontal'],
 ]);
-$dataList=ArrayHelper::map(MataKuliah::find()->asArray()->all(), 'kode', 'nama');
+$dataList = ArrayHelper::map(MataKuliah::find()->asArray()->all(), 'kode', 'nama');
 ?>
 <div class="kecakapan-create">
 
@@ -23,15 +23,16 @@ $dataList=ArrayHelper::map(MataKuliah::find()->asArray()->all(), 'kode', 'nama')
 
     <?php $form = ActiveForm::begin(); ?>
 
-        <?= $form->field($model, 'id_kecakapan') ?>
-        <?= $form->field($model, 'kode_matkul')->dropDownList($dataList, 
-            ['prompt'=>'- Mata Kuliah -']) ?>
-        <?= $form->field($model, 'type_kecakapan') ?>
+    <?= $form->field($model, 'kode_matkul')->dropDownList(
+        $dataList,
+        ['prompt' => '- Mata Kuliah -']
+    ) ?>
+    <?= $form->field($model, 'type_kecakapan') ?>
 
 
-        <div class="form-group">
-            <?= Html::submitButton('Submit', ['class' => 'btn btn-primary']) ?>
-        </div>
+    <div class="form-group">
+        <?= Html::submitButton('Submit', ['class' => 'btn btn-primary mt-4']) ?>
+    </div>
 
     <?php ActiveForm::end(); ?>
 

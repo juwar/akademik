@@ -70,8 +70,10 @@ class MahasiswaController extends Controller
         $model = new Mahasiswa();
 
         if ($this->request->isPost) {
+            $newId = strtoupper(substr(uniqid('MH-'),0, 20));
+            $model->nim = $newId;
             if ($model->load($this->request->post()) && $model->save()) {
-                return $this->redirect(['view', 'nim' => $model->nim]);
+                return $this->redirect(['index']);
             }
         } else {
             $model->loadDefaultValues();

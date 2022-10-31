@@ -70,8 +70,10 @@ class NilaiController extends Controller
         $model = new Nilai();
 
         if ($this->request->isPost) {
+            $newId = strtoupper(substr(uniqid('NL-'),0, 10));
+            $model->id_nilai = $newId;
             if ($model->load($this->request->post()) && $model->save()) {
-                return $this->redirect(['view', 'id_nilai' => $model->id_nilai]);
+                return $this->redirect(['index']);
             }
         } else {
             $model->loadDefaultValues();

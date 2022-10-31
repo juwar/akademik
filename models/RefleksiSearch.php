@@ -14,13 +14,11 @@ class RefleksiSearch extends Refleksi
     /**
      * {@inheritdoc}
      */
-    public $kecakapan;
-    public $username;
+    public $mahasiswa;
     public function rules()
     {
         return [
-            [['id_refleksi'], 'integer'],
-            [['nim', 'id_kecakapan', 'refleksi_pembimbing', 'username', 'kecakapan'], 'safe'],
+            [['id_refleksi', 'nim', 'refleksi_pembimbing', 'mahasiswa'], 'safe'],
         ];
     }
 
@@ -45,20 +43,14 @@ class RefleksiSearch extends Refleksi
         $query = Refleksi::find();
 
         // add conditions that should always apply here
-        $query->joinWith(['dataKecakapan']);
-        $query->joinWith(['mahasiswa']);
+        $query->joinWith(['dataMahasiswa']);
 
         $dataProvider = new ActiveDataProvider([
             'query' => $query,
         ]);
-
-        $dataProvider->sort->attributes['kecakapan'] = [
-            'asc' => ['kecakapan.type_kecakapan' => SORT_ASC],
-            'desc' => ['kecakapan.type_kecakapan' => SORT_DESC],
-        ];
-        $dataProvider->sort->attributes['username'] = [
-            'asc' => ['mata_kuliah.nama' => SORT_ASC],
-            'desc' => ['kecakapan.type_kecakapan' => SORT_DESC],
+        $dataProvider->sort->attributes['mahasiswa'] = [
+            'asc' => ['mahasiswa.nama' => SORT_ASC],
+            'desc' => ['mahasiswa.nama' => SORT_DESC],
         ];
 
         $this->load($params);
@@ -70,15 +62,10 @@ class RefleksiSearch extends Refleksi
         }
 
         // grid filtering conditions
-        $query->andFilterWhere([
-            'id_refleksi' => $this->id_refleksi,
-        ]);
-
-        $query->andFilterWhere(['like', 'nim', $this->nim])
-            ->andFilterWhere(['like', 'id_kecakapan', $this->id_kecakapan])
+        $query->andFilterWhere(['like', 'id_refleksi', $this->id_refleksi])
+            ->andFilterWhere(['like', 'nim', $this->nim])
             ->andFilterWhere(['like', 'refleksi_pembimbing', $this->refleksi_pembimbing])
-            ->andFilterWhere(['like', 'kecakapan.type_kecakapan', $this->kecakapan])
-            ->andFilterWhere(['like', 'mahasiswa.nama', $this->username]);
+            ->andFilterWhere(['like', 'mahasiswa.nama', $this->mahasiswa]);
 
         return $dataProvider;
     }

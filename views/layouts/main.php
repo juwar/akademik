@@ -43,6 +43,7 @@ $this->registerLinkTag(['rel' => 'icon', 'type' => 'image/x-icon', 'href' => '@w
             ['label' => 'Mahasiswa', 'url' => ['/mahasiswa/index']],
             ['label' => 'Mata Kuliah', 'url' => ['/mata-kuliah/index']],
             ['label' => 'Kecakapan', 'url' => ['/kecakapan/index']],
+            ['label' => 'Kecakapan Siswa', 'url' => ['/kecakapan-siswa/index']],
             ['label' => 'Nilai', 'url' => ['/nilai/index']],
             ['label' => 'Refleksi', 'url' => ['/refleksi/index']],
             Yii::$app->user->isGuest
