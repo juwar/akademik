@@ -60,7 +60,7 @@ class KecakapanSiswa extends \yii\db\ActiveRecord
     }
 
     public function getKecakapan(){
-        return $this->dataKecakapan;
+        return $this->dataKecakapan->type_kecakapan;
     }
 
     public function getDataMahasiswa(){
@@ -68,6 +68,6 @@ class KecakapanSiswa extends \yii\db\ActiveRecord
     }
 
     public function getMahasiswa(){
-        return $this->dataMahasiswa; 
+        return $this->dataMahasiswa->nama; 
     }
 }

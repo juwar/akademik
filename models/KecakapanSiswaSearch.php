@@ -14,10 +14,12 @@ class KecakapanSiswaSearch extends KecakapanSiswa
     /**
      * {@inheritdoc}
      */
+    public $kecakapan;
+    public $mahasiswa;
     public function rules()
     {
         return [
-            [['id', 'id_kecakapan', 'nim'], 'safe'],
+            [['id', 'id_kecakapan', 'nim', 'kecakapan', 'mahasiswa'], 'safe'],
         ];
     }
 
