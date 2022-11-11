@@ -61,9 +61,11 @@ class SiteController extends Controller
      */
     public function actionIndex()
     {
-        // $DB = Yii::$app->db;
-        // $ts = $DB->createCommand("")->queryAll();
-        return $this->render('index');
+        $DB = Yii::$app->db;
+        $ts = $DB->createCommand("select mk.nama, count(mk.kode) as total from kecakapan_siswa ks join kecakapan k on k.id_kecakapan = ks.id_kecakapan join mata_kuliah mk on k.kode_matkul = mk.kode group by mk.kode")->queryAll();
+        // var_dump($ts);
+        // die;
+        return $this->render('index', compact('ts'));
     }
 
     /**
