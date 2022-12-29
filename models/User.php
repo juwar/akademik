@@ -9,7 +9,7 @@ class User extends \yii\base\BaseObject implements \yii\web\IdentityInterface
     public $password;
     public $authKey;
     public $accessToken;
-    public $permissions;
+    public $role;
 
 
     const ROLE_ADMIN = 10;
@@ -23,7 +23,7 @@ class User extends \yii\base\BaseObject implements \yii\web\IdentityInterface
             'password' => 'admin',
             'authKey' => 'test100key',
             'accessToken' => '100-token',
-            'permissions' => 10,
+            'role' => 10,
         ],
         // '101' => [
         //     'id' => '101',
@@ -31,7 +31,7 @@ class User extends \yii\base\BaseObject implements \yii\web\IdentityInterface
         //     'password' => 'demo',
         //     'authKey' => 'test101key',
         //     'accessToken' => '101-token',
-        //     'permissions' => 20,
+        //     'role' => 20,
         // ],
         '102' => [
             'id' => '102',
@@ -39,7 +39,7 @@ class User extends \yii\base\BaseObject implements \yii\web\IdentityInterface
             'password' => 'dosen',
             'authKey' => 'test101key',
             'accessToken' => '102-token',
-            'permissions' => 20,
+            'role' => 20,
         ],
         '103' => [
             'id' => '103',
@@ -47,7 +47,7 @@ class User extends \yii\base\BaseObject implements \yii\web\IdentityInterface
             'password' => 'mahasiswa',
             'authKey' => 'test103key',
             'accessToken' => '103-token',
-            'permissions' => 30,
+            'role' => 30,
         ],
     ];
 

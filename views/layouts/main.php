@@ -19,7 +19,7 @@ $this->registerMetaTag(['name' => 'viewport', 'content' => 'width=device-width, 
 $this->registerMetaTag(['name' => 'description', 'content' => $this->params['meta_description'] ?? '']);
 $this->registerMetaTag(['name' => 'keywords', 'content' => $this->params['meta_keywords'] ?? '']);
 $this->registerLinkTag(['rel' => 'icon', 'type' => 'image/x-icon', 'href' => '@web/favicon.ico']);
-$permissions = Yii::$app->user->identity ? Yii::$app->user->identity->permissions : 0;
+$role = Yii::$app->user->identity ? Yii::$app->user->identity->role : 0;
 ?>
 <?php $this->beginPage() ?>
 <!DOCTYPE html>
@@ -42,13 +42,13 @@ $permissions = Yii::$app->user->identity ? Yii::$app->user->identity->permission
     echo Nav::widget([
         'options' => ['class' => 'navbar-nav'],
         'items' => [
-            ['label' => 'Home', 'url' => ['/site/index'], 'visible' => $permissions === User::ROLE_ADMIN || $permissions === User::ROLE_MODERATOR || $permissions === User::ROLE_USER,],
-            ['label' => 'Mahasiswa', 'url' => ['/mahasiswa/index'], 'visible' => $permissions === User::ROLE_ADMIN || $permissions === User::ROLE_MODERATOR,],
-            ['label' => 'Mata Kuliah', 'url' => ['/mata-kuliah/index'], 'visible' => $permissions === User::ROLE_ADMIN || $permissions === User::ROLE_MODERATOR || $permissions === User::ROLE_USER,],
-            ['label' => 'Kecakapan', 'url' => ['/kecakapan/index'], 'visible' => $permissions === User::ROLE_ADMIN || $permissions === User::ROLE_MODERATOR || $permissions === User::ROLE_USER,],
-            ['label' => 'Kecakapan Siswa', 'url' => ['/kecakapan-siswa/index'], 'visible' => $permissions === User::ROLE_ADMIN || $permissions === User::ROLE_MODERATOR || $permissions === User::ROLE_USER, ],
-            ['label' => 'Nilai', 'url' => ['/nilai/index'], 'visible' => $permissions === User::ROLE_ADMIN || $permissions === User::ROLE_MODERATOR || $permissions === User::ROLE_USER,],
-            ['label' => 'Refleksi', 'url' => ['/refleksi/index'], 'visible' => $permissions === User::ROLE_ADMIN || $permissions === User::ROLE_MODERATOR || $permissions === User::ROLE_USER,],
+            ['label' => 'Home', 'url' => ['/site/index'], 'visible' => $role === User::ROLE_ADMIN || $role === User::ROLE_MODERATOR || $role === User::ROLE_USER,],
+            ['label' => 'Mahasiswa', 'url' => ['/mahasiswa/index'], 'visible' => $role === User::ROLE_ADMIN || $role === User::ROLE_MODERATOR,],
+            ['label' => 'Mata Kuliah', 'url' => ['/mata-kuliah/index'], 'visible' => $role === User::ROLE_ADMIN || $role === User::ROLE_MODERATOR || $role === User::ROLE_USER,],
+            ['label' => 'Kecakapan', 'url' => ['/kecakapan/index'], 'visible' => $role === User::ROLE_ADMIN || $role === User::ROLE_MODERATOR || $role === User::ROLE_USER,],
+            ['label' => 'Kecakapan Siswa', 'url' => ['/kecakapan-siswa/index'], 'visible' => $role === User::ROLE_ADMIN || $role === User::ROLE_MODERATOR || $role === User::ROLE_USER, ],
+            ['label' => 'Nilai', 'url' => ['/nilai/index'], 'visible' => $role === User::ROLE_ADMIN || $role === User::ROLE_MODERATOR || $role === User::ROLE_USER,],
+            ['label' => 'Refleksi', 'url' => ['/refleksi/index'], 'visible' => $role === User::ROLE_ADMIN || $role === User::ROLE_MODERATOR || $role === User::ROLE_USER,],
             Yii::$app->user->isGuest
                 ? ['label' => 'Login', 'url' => ['/site/login']]
                 : '<li class="nav-item">'
