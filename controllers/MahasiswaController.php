@@ -7,6 +7,9 @@ use app\models\MahasiswaSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
+use yii\filters\AccessControl;
+use app\models\User;
+use app\components\AccessRule;
 
 /**
  * MahasiswaController implements the CRUD actions for Mahasiswa model.
@@ -26,6 +29,49 @@ class MahasiswaController extends Controller
                     'actions' => [
                         'delete' => ['POST'],
                     ],
+                ],
+                'access' => [
+                    'class' => AccessControl::className(),
+                    // We will override the default rule config with the new AccessRule class 
+                    'ruleConfig' => [
+                        'class' => AccessRule::className(),
+                    ],
+                    'only' => ['index','create', 'update', 'delete'],
+                    'rules' => [
+                        [
+                            'actions' => ['index'],
+                            'allow' => true,
+                            // Allow users, moderators and admins to view 
+                            'roles' => [
+                                User::ROLE_MODERATOR,
+                                User::ROLE_ADMIN
+                            ],
+                        ],
+                        [
+                            'actions' => ['create'],
+                            'allow' => true,
+                            // Allow users, moderators and admins to create 
+                            'roles' => [
+                                User::ROLE_ADMIN
+                            ],
+                        ],
+                        [
+                            'actions' => ['update'],
+                            'allow' => true,
+                            // Allow moderators and admins to update 
+                            'roles' => [
+                                User::ROLE_ADMIN
+                            ],
+                        ],
+                        [
+                            'actions' => ['delete'],
+                            'allow' => true,
+                            // Allow admins to delete 
+                            'roles' => [
+                                User::ROLE_ADMIN
+                            ],
+                        ],
+                   ],
                 ],
             ]
         );
