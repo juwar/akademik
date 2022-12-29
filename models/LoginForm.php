@@ -78,4 +78,18 @@ class LoginForm extends Model
 
         return $this->_user;
     }
+
+    /**
+     * Finds user by [[username]]
+     *
+     * @return User|null
+     */
+    public function getPermissions()
+    {
+        if ($this->_user === false) {
+            $this->_user = User::findByUsername($this->username);
+        }
+
+        return $this->_user;
+    }
 }

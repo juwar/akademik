@@ -9,6 +9,12 @@ class User extends \yii\base\BaseObject implements \yii\web\IdentityInterface
     public $password;
     public $authKey;
     public $accessToken;
+    public $permissions;
+
+
+    const ROLE_ADMIN = 10;
+    const ROLE_MODERATOR = 20;
+    const ROLE_USER = 30;
 
     private static $users = [
         '100' => [
@@ -17,13 +23,31 @@ class User extends \yii\base\BaseObject implements \yii\web\IdentityInterface
             'password' => 'admin',
             'authKey' => 'test100key',
             'accessToken' => '100-token',
+            'permissions' => 10,
         ],
-        '101' => [
-            'id' => '101',
-            'username' => 'demo',
-            'password' => 'demo',
+        // '101' => [
+        //     'id' => '101',
+        //     'username' => 'demo',
+        //     'password' => 'demo',
+        //     'authKey' => 'test101key',
+        //     'accessToken' => '101-token',
+        //     'permissions' => 20,
+        // ],
+        '102' => [
+            'id' => '102',
+            'username' => 'dosen',
+            'password' => 'dosen',
             'authKey' => 'test101key',
-            'accessToken' => '101-token',
+            'accessToken' => '102-token',
+            'permissions' => 20,
+        ],
+        '103' => [
+            'id' => '103',
+            'username' => 'mahasiswa',
+            'password' => 'mahasiswa',
+            'authKey' => 'test103key',
+            'accessToken' => '103-token',
+            'permissions' => 30,
         ],
     ];
 
