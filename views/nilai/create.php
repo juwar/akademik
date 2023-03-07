@@ -5,6 +5,7 @@ use yii\widgets\ActiveForm;
 use yii\helpers\ArrayHelper;
 use app\models\MataKuliah;
 use app\models\Mahasiswa;
+use unclead\multipleinput\MultipleInput;
 
 
 /** @var yii\web\View $this */
@@ -31,13 +32,34 @@ $dataListNim = ArrayHelper::map(Mahasiswa::find()->asArray()->all(), 'nim', 'nam
         $dataListNim,
         ['prompt' => '- Nama -']
     )->label('Nama') ?>
-    <?= $form->field($model, 'kode_matkul')->dropDownList(
-        $dataList,
-        ['prompt' => '- Mata Kuliah -']
-    )->label('Mata Kuliah') ?>
     <?= $form->field($model, 'semester') ?>
-    <?= $form->field($model, 'nilai') ?>
-    <?= $form->field($model, 'bobot_nilai') ?>
+    <?= $form->field($model, 'nilai')->widget(MultipleInput::className(), [
+        'min' => 1,
+        'max' => 4,
+        'allowEmptyList'    => false,
+        'enableGuessTitle'  => true,
+        'addButtonPosition' => MultipleInput::POS_HEADER,
+        'addButtonOptions' => [
+            'class' => 'btn btn-success',
+            'label' => 'Add' // also you can use html code
+        ],
+        'removeButtonOptions' => [
+            'label' => 'Remove'
+        ],
+        'columns' => [
+            [
+                'name'  => 'matkul',
+                'title' => 'Mata Kuliah',
+                'type' => 'dropDownList',
+                'items' => $dataList,
+            ],
+            [
+                'name'  => 'nilai',
+                'title' => 'Nilai (A, B, C, D, E)',
+                'type' => 'textInput',
+            ],
+        ]
+    ])->label(false) ?>
 
 
     <div class="form-group">

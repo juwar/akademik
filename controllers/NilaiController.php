@@ -37,7 +37,7 @@ class NilaiController extends Controller
                     'ruleConfig' => [
                         'class' => AccessRule::className(),
                     ],
-                    'only' => ['index','create', 'update', 'delete'],
+                    'only' => ['index', 'create', 'update', 'delete'],
                     'rules' => [
                         [
                             'actions' => ['index'],
@@ -76,7 +76,7 @@ class NilaiController extends Controller
                                 User::ROLE_MODERATOR
                             ],
                         ],
-                   ],
+                    ],
                 ],
             ]
         );
@@ -95,11 +95,11 @@ class NilaiController extends Controller
         $role = Yii::$app->user->identity->role;
         $actionButton = "";
         $actionRules = (object) [
-            'admin' => "{view} {update} {delete}", 
-            'dosen' => "{view} {update} {delete}", 
+            'admin' => "{view} {update} {delete}",
+            'dosen' => "{view} {update} {delete}",
             'mahasiswa' => ""
         ];
-        switch($role){
+        switch ($role) {
             case 10:
                 $actionButton = $actionRules->admin;
                 break;
@@ -142,10 +142,66 @@ class NilaiController extends Controller
     {
         $model = new Nilai();
 
+        function getGradeInNumber($grade)
+        {
+            $gradeInNumber = 0;
+            switch ($grade) {
+                case "A":
+                    $gradeInNumber = 4;
+                    break;
+                case "B":
+                    $gradeInNumber = 3.5;
+                    break;
+                case "C":
+                    $gradeInNumber = 3;
+                    break;
+                case "D":
+                    $gradeInNumber = 2.5;
+                    break;
+                default:
+                    $gradeInNumber = 0;
+            }
+
+            return $gradeInNumber;
+        }
+
+        function getNewId($index)
+        {
+            $newId = strtoupper(substr(uniqid('NL-'), 0, 10));
+            $stringIndex = (string)$index;
+            return substr_replace($newId, $stringIndex, 4, strlen($stringIndex));
+        }
+
         if ($this->request->isPost) {
-            $newId = strtoupper(substr(uniqid('NL-'),0, 10));
-            $model->id_nilai = $newId;
-            if ($model->load($this->request->post()) && $model->save()) {
+            $postData = Yii::$app->request->post()['Nilai'];
+
+            for ($i = 0; $i < count($postData['nilai']); $i++) {
+                $data[$i][0] = getNewId($i);
+                $data[$i][1] = $postData['nim'];
+                $data[$i][2] = $postData['nilai'][$i]['matkul'];
+                $data[$i][3] = $postData['semester'];
+                $data[$i][4] = $postData['nilai'][$i]['nilai'];
+                $data[$i][5] = getGradeInNumber($postData['nilai'][$i]['nilai']);
+            }
+
+            $request = Yii::$app->db->createCommand()->batchInsert(
+                'nilai',
+                [
+                    'id_nilai',
+                    'nim',
+                    'kode_matkul',
+                    'semester',
+                    'nilai',
+                    'bobot_nilai',
+                ],
+                $data
+            )->execute();
+
+            // echo "<pre>";
+            // print_r($request);
+            // echo "</pre>";
+            // die;
+            if ($request > 0) {
                 return $this->redirect(['index']);
             }
         } else {

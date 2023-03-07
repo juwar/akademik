@@ -36,7 +36,8 @@ class Nilai extends \yii\db\ActiveRecord
             [['semester', 'bobot_nilai'], 'integer'],
             [['nim'], 'string', 'max' => 20],
             [['kode_matkul'], 'string', 'max' => 10],
-            [['nilai'], 'string', 'max' => 3],
+            ['nilai', 'each', 'rule' => ['string']],
+            // [['nilai'], 'string', 'max' => 3],
         ];
     }
 
@@ -64,19 +65,23 @@ class Nilai extends \yii\db\ActiveRecord
         return new NilaiQuery(get_called_class());
     }
 
-    public function getMataKuliah(){
+    public function getMataKuliah()
+    {
         return $this->hasOne(MataKuliah::className(), ['kode' => 'kode_matkul']);
     }
 
-    public function getMatkul(){
-        return $this->mataKuliah->nama; 
+    public function getMatkul()
+    {
+        return $this->mataKuliah->nama;
     }
 
-    public function getMahasiswa(){
+    public function getMahasiswa()
+    {
         return $this->hasOne(Mahasiswa::className(), ['nim' => 'nim']);
     }
 
-    public function getUsername(){
-        return $this->mahasiswa->nama; 
+    public function getUsername()
+    {
+        return $this->mahasiswa->nama;
     }
 }
