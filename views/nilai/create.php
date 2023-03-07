@@ -24,7 +24,9 @@ $dataListNim = ArrayHelper::map(Mahasiswa::find()->asArray()->all(), 'nim', 'nam
 ?>
 <div class="nilai-create">
 
-    <h1><?= Html::encode($this->title) ?></h1>
+    <h1>
+        <?= Html::encode($this->title) ?>
+    </h1>
 
     <?php $form = ActiveForm::begin(); ?>
 
@@ -36,8 +38,8 @@ $dataListNim = ArrayHelper::map(Mahasiswa::find()->asArray()->all(), 'nim', 'nam
     <?= $form->field($model, 'nilai')->widget(MultipleInput::className(), [
         'min' => 1,
         'max' => 4,
-        'allowEmptyList'    => false,
-        'enableGuessTitle'  => true,
+        'allowEmptyList' => false,
+        'enableGuessTitle' => true,
         'addButtonPosition' => MultipleInput::POS_HEADER,
         'addButtonOptions' => [
             'class' => 'btn btn-success',
@@ -48,13 +50,13 @@ $dataListNim = ArrayHelper::map(Mahasiswa::find()->asArray()->all(), 'nim', 'nam
         ],
         'columns' => [
             [
-                'name'  => 'matkul',
+                'name' => 'matkul',
                 'title' => 'Mata Kuliah',
                 'type' => 'dropDownList',
                 'items' => $dataList,
             ],
             [
-                'name'  => 'nilai',
+                'name' => 'nilai',
                 'title' => 'Nilai (A, B, C, D, E)',
                 'type' => 'textInput',
             ],
