@@ -7,6 +7,10 @@ use app\models\MataKuliahSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
+use yii\filters\AccessControl;
+use app\models\User;
+use app\components\AccessRule;
+use Yii;
 
 /**
  * MataKuliahController implements the CRUD actions for MataKuliah model.
@@ -27,6 +31,50 @@ class MataKuliahController extends Controller
                         'delete' => ['POST'],
                     ],
                 ],
+                'access' => [
+                    'class' => AccessControl::className(),
+                    // We will override the default rule config with the new AccessRule class 
+                    'ruleConfig' => [
+                        'class' => AccessRule::className(),
+                    ],
+                    'only' => ['index','create', 'update', 'delete'],
+                    'rules' => [
+                        [
+                            'actions' => ['index'],
+                            'allow' => true,
+                            // Allow users, moderators and admins to view 
+                            'roles' => [
+                                User::ROLE_USER,
+                                User::ROLE_MODERATOR,
+                                User::ROLE_ADMIN
+                            ],
+                        ],
+                        [
+                            'actions' => ['create'],
+                            'allow' => true,
+                            // Allow users, moderators and admins to create 
+                            'roles' => [
+                                User::ROLE_ADMIN
+                            ],
+                        ],
+                        [
+                            'actions' => ['update'],
+                            'allow' => true,
+                            // Allow moderators and admins to update 
+                            'roles' => [
+                                User::ROLE_ADMIN
+                            ],
+                        ],
+                        [
+                            'actions' => ['delete'],
+                            'allow' => true,
+                            // Allow admins to delete 
+                            'roles' => [
+                                User::ROLE_ADMIN
+                            ],
+                        ],
+                   ],
+                ],
             ]
         );
     }
@@ -40,10 +88,31 @@ class MataKuliahController extends Controller
     {
         $searchModel = new MataKuliahSearch();
         $dataProvider = $searchModel->search($this->request->queryParams);
+        $role = Yii::$app->user->identity->role;
+        $actionButton = "";
+        $actionRules = (object) [
+            'admin' => "{view} {update} {delete}", 
+            'dosen' => "{view} {update}", 
+            'mahasiswa' => ""
+        ];
+        switch($role){
+            case 10:
+                $actionButton = $actionRules->admin;
+                break;
+            case 20:
+                $actionButton = $actionRules->dosen;
+                break;
+            case 30:
+                $actionButton = $actionRules->mahasiswa;
+                break;
+            default:
+                $actionButton = "";
+        }
 
         return $this->render('index', [
             'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,
+            'actionButton' => $actionButton,
         ]);
     }
 

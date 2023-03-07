@@ -36,7 +36,8 @@ $this->params['breadcrumbs'][] = $this->title;
                 'class' => ActionColumn::className(),
                 'urlCreator' => function ($action, MataKuliah $model, $key, $index, $column) {
                     return Url::toRoute([$action, 'kode' => $model->kode]);
-                 }
+                 },
+                'template' => $actionButton,
             ],
         ],
     ]); ?>
