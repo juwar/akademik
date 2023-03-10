@@ -12,7 +12,7 @@ foreach ($ts as $matkul) {
 }
 // var_dump($total); die;
 
-$this->title = 'My Yii Application';
+$this->title = 'PTI AKADEMIK';
 ?>
 <div class="site-index">
 

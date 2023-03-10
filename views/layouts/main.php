@@ -45,7 +45,7 @@ $role = Yii::$app->user->identity ? Yii::$app->user->identity->role : 0;
             ['label' => 'Home', 'url' => ['/site/index'], 'visible' => $role === User::ROLE_ADMIN || $role === User::ROLE_MODERATOR || $role === User::ROLE_USER,],
             ['label' => 'Mahasiswa', 'url' => ['/mahasiswa/index'], 'visible' => $role === User::ROLE_ADMIN || $role === User::ROLE_MODERATOR,],
             ['label' => 'Mata Kuliah', 'url' => ['/mata-kuliah/index'], 'visible' => $role === User::ROLE_ADMIN || $role === User::ROLE_MODERATOR || $role === User::ROLE_USER,],
-            ['label' => 'Kecakapan', 'url' => ['/kecakapan/index'], 'visible' => $role === User::ROLE_ADMIN || $role === User::ROLE_MODERATOR || $role === User::ROLE_USER,],
+            ['label' => 'Kecakapan', 'url' => ['/kecakapan/index'], 'visible' => $role === User::ROLE_ADMIN || $role === User::ROLE_MODERATOR ,],
             ['label' => 'Kecakapan Siswa', 'url' => ['/kecakapan-siswa/index'], 'visible' => $role === User::ROLE_ADMIN || $role === User::ROLE_MODERATOR || $role === User::ROLE_USER, ],
             ['label' => 'Nilai', 'url' => ['/nilai/index'], 'visible' => $role === User::ROLE_ADMIN || $role === User::ROLE_MODERATOR || $role === User::ROLE_USER,],
             ['label' => 'Refleksi', 'url' => ['/refleksi/index'], 'visible' => $role === User::ROLE_ADMIN || $role === User::ROLE_MODERATOR || $role === User::ROLE_USER,],
