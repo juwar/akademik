@@ -11,7 +11,7 @@ use yii\grid\GridView;
 /** @var app\models\KecakapanSearch $searchModel */
 /** @var yii\data\ActiveDataProvider $dataProvider */
 
-$this->title = 'Kecakapan';
+$this->title = 'Data Kecakapan';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="kecakapan-index">

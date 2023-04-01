@@ -10,7 +10,7 @@ use yii\grid\GridView;
 /** @var app\models\RefleksiSearch $searchModel */
 /** @var yii\data\ActiveDataProvider $dataProvider */
 
-$this->title = 'Refleksis';
+$this->title = 'Refleksi';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="refleksi-index">

@@ -10,7 +10,7 @@ use app\models\Mahasiswa;
 /** @var app\models\KecakapanSiswa $model */
 
 $this->title = 'Update Kecakapan Siswa: ' . $model->id;
-$this->params['breadcrumbs'][] = ['label' => 'Kecakapan Siswas', 'url' => ['index']];
+$this->params['breadcrumbs'][] = ['label' => 'Kecakapan Siswa', 'url' => ['index']];
 $this->params['breadcrumbs'][] = ['label' => $model->id, 'url' => ['view', 'id' => $model->id]];
 $this->params['breadcrumbs'][] = 'Update';
 

@@ -7,7 +7,7 @@ use yii\widgets\ActiveForm;
 /** @var app\models\Mahasiswa $model */
 
 $this->title = 'Update Mahasiswa: ' . $model->nim;
-$this->params['breadcrumbs'][] = ['label' => 'Mahasiswas', 'url' => ['index']];
+$this->params['breadcrumbs'][] = ['label' => 'Mahasiswa', 'url' => ['index']];
 $this->params['breadcrumbs'][] = ['label' => $model->nim, 'url' => ['view', 'nim' => $model->nim]];
 $this->params['breadcrumbs'][] = 'Update';
 

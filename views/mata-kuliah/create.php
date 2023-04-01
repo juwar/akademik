@@ -7,7 +7,7 @@ use yii\widgets\ActiveForm;
 /** @var app\models\MataKuliah $model */
 
 $this->title = 'Create Mata Kuliah';
-$this->params['breadcrumbs'][] = ['label' => 'Mata Kuliahs', 'url' => ['index']];
+$this->params['breadcrumbs'][] = ['label' => 'Mata Kuliah', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 
 $form = ActiveForm::begin([

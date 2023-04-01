@@ -10,7 +10,7 @@ use app\models\Mahasiswa;
 /** @var app\models\KecakapanSiswa $model */
 
 $this->title = 'Create Kecakapan Siswa';
-$this->params['breadcrumbs'][] = ['label' => 'Kecakapan Siswas', 'url' => ['index']];
+$this->params['breadcrumbs'][] = ['label' => 'Kecakapan Siswa', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 
 $form = ActiveForm::begin([

@@ -10,8 +10,8 @@ use yii\grid\GridView;
 /** @var app\models\KecakapanSiswaSearch $searchModel */
 /** @var yii\data\ActiveDataProvider $dataProvider */
 
-$this->title = 'Kecakapan Siswas';
-$this->params['breadcrumbs'][] = $this->title;
+$this->title = 'Data Kecakapan Siswa';
+// $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="kecakapan-siswa-index">
 

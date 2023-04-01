@@ -10,7 +10,7 @@ use app\models\Mahasiswa;
 /** @var app\models\Nilai $model */
 
 $this->title = 'Update Nilai: ' . $model->id_nilai;
-$this->params['breadcrumbs'][] = ['label' => 'Nilais', 'url' => ['index']];
+$this->params['breadcrumbs'][] = ['label' => 'Nilai', 'url' => ['index']];
 $this->params['breadcrumbs'][] = ['label' => $model->id_nilai, 'url' => ['view', 'id_nilai' => $model->id_nilai]];
 $this->params['breadcrumbs'][] = 'Update';
 

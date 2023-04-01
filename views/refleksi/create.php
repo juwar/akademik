@@ -9,7 +9,7 @@ use app\models\Mahasiswa;
 /** @var app\models\Refleksi $model */
 
 $this->title = 'Create Refleksi';
-$this->params['breadcrumbs'][] = ['label' => 'Refleksis', 'url' => ['index']];
+$this->params['breadcrumbs'][] = ['label' => 'Refleksi', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 
 $form = ActiveForm::begin([

@@ -10,7 +10,7 @@ use yii\grid\GridView;
 /** @var app\models\NilaiSearch $searchModel */
 /** @var yii\data\ActiveDataProvider $dataProvider */
 
-$this->title = 'Nilais';
+$this->title = 'Data Nilai';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="nilai-index">

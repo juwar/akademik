@@ -7,7 +7,7 @@ use yii\widgets\ActiveForm;
 /** @var app\models\Mahasiswa $model */
 
 $this->title = 'Create Mahasiswa';
-$this->params['breadcrumbs'][] = ['label' => 'Mahasiswas', 'url' => ['index']];
+$this->params['breadcrumbs'][] = ['label' => 'Mahasiswa', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 
 $form = ActiveForm::begin([

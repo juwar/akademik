@@ -11,7 +11,7 @@ use app\models\User;
 /** @var app\models\MahasiswaSearch $searchModel */
 /** @var yii\data\ActiveDataProvider $dataProvider */
 
-$this->title = 'Mahasiswas';
+$this->title = 'Data Mahasiswa';
 $this->params['breadcrumbs'][] = $this->title;
 $role = Yii::$app->user->identity ? Yii::$app->user->identity->role : 0;
 $accessRules = $role === User::ROLE_ADMIN;

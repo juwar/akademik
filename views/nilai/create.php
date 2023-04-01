@@ -12,7 +12,7 @@ use unclead\multipleinput\MultipleInput;
 /** @var app\models\Nilai $model */
 
 $this->title = 'Create Nilai';
-$this->params['breadcrumbs'][] = ['label' => 'Nilais', 'url' => ['index']];
+$this->params['breadcrumbs'][] = ['label' => 'Nilai', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 
 $form = ActiveForm::begin([

@@ -9,7 +9,7 @@ use app\models\Mahasiswa;
 /** @var app\models\Refleksi $model */
 
 $this->title = 'Update Refleksi: ' . $model->id_refleksi;
-$this->params['breadcrumbs'][] = ['label' => 'Refleksis', 'url' => ['index']];
+$this->params['breadcrumbs'][] = ['label' => 'Refleksi', 'url' => ['index']];
 $this->params['breadcrumbs'][] = ['label' => $model->id_refleksi, 'url' => ['view', 'id_refleksi' => $model->id_refleksi]];
 $this->params['breadcrumbs'][] = 'Update';
 
