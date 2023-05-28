@@ -2,9 +2,12 @@
 
 namespace app\models;
 
+use app\models\Mahasiswa;
+
 class User extends \yii\base\BaseObject implements \yii\web\IdentityInterface
 {
     public $id;
+    public $nama;
     public $username;
     public $password;
     public $authKey;
@@ -25,14 +28,6 @@ class User extends \yii\base\BaseObject implements \yii\web\IdentityInterface
             'accessToken' => '100-token',
             'role' => 10,
         ],
-        // '101' => [
-        //     'id' => '101',
-        //     'username' => 'demo',
-        //     'password' => 'demo',
-        //     'authKey' => 'test101key',
-        //     'accessToken' => '101-token',
-        //     'role' => 20,
-        // ],
         '102' => [
             'id' => '102',
             'username' => 'dosen',
@@ -51,13 +46,52 @@ class User extends \yii\base\BaseObject implements \yii\web\IdentityInterface
         ],
     ];
 
+    public static function getUsers(): array
+    {
+        $query = Mahasiswa::find()->all();
+        $list = [
+            '100' => [
+                'id' => '100',
+                'username' => 'admin',
+                'password' => 'admin',
+                'authKey' => 'test100key',
+                'accessToken' => '100-token',
+                'role' => 10,
+            ],
+            '102' => [
+                'id' => '102',
+                'username' => 'dosen',
+                'password' => 'dosen',
+                'authKey' => 'test101key',
+                'accessToken' => '102-token',
+                'role' => 20,
+            ],
+        ];
+        foreach ($query as $row) {
+            $list[$row['nim']] = [
+                'id' => $row['nim'],
+                'nama' => $row['nama'],
+                'username' => $row['nim'],
+                'password' => $row['nim'],
+                'authKey' => $row['nim'],
+                'accessToken' => $row['nim'],
+                'role' => 30,
+            ];
+        }
+        // echo '<pre>';
+        // print_r($list);
+        // exit;
+        // die;
+        return $list;
+    }
+
 
     /**
      * {@inheritdoc}
      */
     public static function findIdentity($id)
     {
-        return isset(self::$users[$id]) ? new static(self::$users[$id]) : null;
+        return isset(self::getUsers()[$id]) ? new static(self::getUsers()[$id]) : null;
     }
 
     /**
@@ -65,7 +99,7 @@ class User extends \yii\base\BaseObject implements \yii\web\IdentityInterface
      */
     public static function findIdentityByAccessToken($token, $type = null)
     {
-        foreach (self::$users as $user) {
+        foreach (self::getUsers() as $user) {
             if ($user['accessToken'] === $token) {
                 return new static($user);
             }
@@ -82,7 +116,7 @@ class User extends \yii\base\BaseObject implements \yii\web\IdentityInterface
      */
     public static function findByUsername($username)
     {
-        foreach (self::$users as $user) {
+        foreach (self::getUsers() as $user) {
             if (strcasecmp($user['username'], $username) === 0) {
                 return new static($user);
             }

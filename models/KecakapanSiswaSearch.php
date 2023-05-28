@@ -39,9 +39,9 @@ class KecakapanSiswaSearch extends KecakapanSiswa
      *
      * @return ActiveDataProvider
      */
-    public function search($params)
+    public function search($params, $id = null)
     {
-        $query = KecakapanSiswa::find();
+        $query = $id !== null ? KecakapanSiswa::find()->andFilterWhere(['like', 'kecakapan_siswa.nim', $id]) : KecakapanSiswa::find();
 
         // add conditions that should always apply here
         $query->joinWith(['dataKecakapan']);

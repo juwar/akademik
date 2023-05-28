@@ -7,6 +7,7 @@ use app\models\KecakapanSiswaSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
+use Yii;
 
 /**
  * KecakapanSiswaController implements the CRUD actions for KecakapanSiswa model.
@@ -38,8 +39,15 @@ class KecakapanSiswaController extends Controller
      */
     public function actionIndex()
     {
+        $identity = Yii::$app->user->identity;
+        $role = Yii::$app->user->identity->role;
         $searchModel = new KecakapanSiswaSearch();
-        $dataProvider = $searchModel->search($this->request->queryParams);
+        $dataProvider = $searchModel->search($this->request->queryParams, $role === 30 ? $identity->id : null);
+
+        // echo '<pre>';
+        // print_r($identity);
+        // exit;
+        // die;
 
         return $this->render('index', [
             'searchModel' => $searchModel,
@@ -70,7 +78,7 @@ class KecakapanSiswaController extends Controller
         $model = new KecakapanSiswa();
 
         if ($this->request->isPost) {
-            $newId = strtoupper(substr(uniqid('KS-'),0, 10));
+            $newId = strtoupper(substr(uniqid('KS-'), 0, 10));
             $model->id = $newId;
             if ($model->load($this->request->post()) && $model->save()) {
                 return $this->redirect(['index']);
