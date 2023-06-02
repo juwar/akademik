@@ -4,6 +4,7 @@ use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 use yii\helpers\ArrayHelper;
 use app\models\Mahasiswa;
+use Yii;
 
 /** @var yii\web\View $this */
 /** @var app\models\Refleksi $model */
@@ -15,14 +16,17 @@ $form = ActiveForm::begin([
     'id' => 'login-form',
     'options' => ['class' => 'form-horizontal'],
 ]);
-$dataListMahasiswa = ArrayHelper::map(Mahasiswa::find()->asArray()->all(), 'nim', 'nama');
+$identity = Yii::$app->user->identity;
+$dataListMahasiswa = ArrayHelper::map(Mahasiswa::find()->where('id_dosen=:id_dosen', array(':id_dosen' => $identity->id))->asArray()->all(), 'nim', 'nama');
 
 ?>
 <div class="refleksi-create">
 
-    <h1><?= Html::encode($this->title) ?></h1>
+    <h1>
+        <?= Html::encode($this->title) ?>
+    </h1>
 
-      <?php $form = ActiveForm::begin(); ?>
+    <?php $form = ActiveForm::begin(); ?>
     <?= $form->field($model, 'nim')->dropDownList(
         $dataListMahasiswa,
         ['prompt' => '- Nama -', 'label' => 'Nama']

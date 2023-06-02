@@ -17,13 +17,15 @@ $form = ActiveForm::begin([
     'id' => 'login-form',
     'options' => ['class' => 'form-horizontal'],
 ]);
-$dataListMahasiswa = ArrayHelper::map(Mahasiswa::find()->asArray()->all(), 'nim', 'nama');
+$dataListMahasiswa = ArrayHelper::map(Mahasiswa::find()->where('id_dosen=:id_dosen', array(':id_dosen' => $identity->id))->asArray()->all(), 'nim', 'nama');
 
 ?>
 <div class="refleksi-update">
 
-    <h1><?= Html::encode($this->title) ?></h1>
-    
+    <h1>
+        <?= Html::encode($this->title) ?>
+    </h1>
+
     <?php $form = ActiveForm::begin(); ?>
     <?= $form->field($model, 'id_refleksi')->textInput(['disabled' => true]) ?>
     <?= $form->field($model, 'nim')->dropDownList(
@@ -42,5 +44,5 @@ $dataListMahasiswa = ArrayHelper::map(Mahasiswa::find()->asArray()->all(), 'nim'
     </div>
 
     <?php ActiveForm::end(); ?>
-    
+
 </div>

@@ -82,13 +82,22 @@ $this->title = 'PTI AKADEMIK';
                 </font>
                 <font color=black>
                     <p>
-                        - Mata kuliah pilihan akan dibuka sesuai dengan hasil voting yang tertera pada grafik diatas.<br>
+                        - Mata kuliah pilihan akan dibuka sesuai dengan hasil voting yang tertera pada grafik
+                        diatas.<br>
                         - 5 grafik teratas menunjukkan mata kuliah yang akan dibuka.
 
                     </p>
                 </font>
             </h5>
         </div>
+    </div>
+    <div>
+        <p class="Home__data-label">
+            Kekurangan
+        </p>
+        <p>
+            Kelebihan
+        </p>
     </div>
 
 </div>
