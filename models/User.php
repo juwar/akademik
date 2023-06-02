@@ -49,6 +49,7 @@ class User extends \yii\base\BaseObject implements \yii\web\IdentityInterface
     public static function getUsers(): array
     {
         $query = Mahasiswa::find()->all();
+        $query2 = Dosen::find()->all();
         $list = [
             '100' => [
                 'id' => '100',
@@ -57,14 +58,6 @@ class User extends \yii\base\BaseObject implements \yii\web\IdentityInterface
                 'authKey' => 'test100key',
                 'accessToken' => '100-token',
                 'role' => 10,
-            ],
-            '102' => [
-                'id' => '102',
-                'username' => 'dosen',
-                'password' => 'dosen',
-                'authKey' => 'test101key',
-                'accessToken' => '102-token',
-                'role' => 20,
             ],
         ];
         foreach ($query as $row) {
@@ -76,6 +69,17 @@ class User extends \yii\base\BaseObject implements \yii\web\IdentityInterface
                 'authKey' => $row['nim'],
                 'accessToken' => $row['nim'],
                 'role' => 30,
+            ];
+        }
+        foreach ($query2 as $row) {
+            $list[$row['nip']] = [
+                'id' => $row['nip'],
+                'nama' => $row['nama'],
+                'username' => $row['nip'],
+                'password' => $row['nip'],
+                'authKey' => $row['nip'],
+                'accessToken' => $row['nip'],
+                'role' => 20,
             ];
         }
         // echo '<pre>';

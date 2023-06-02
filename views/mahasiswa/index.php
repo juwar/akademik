@@ -18,7 +18,9 @@ $accessRules = $role === User::ROLE_ADMIN;
 ?>
 <div class="mahasiswa-index">
 
-    <h1><?= Html::encode($this->title) ?></h1>
+    <h1>
+        <?= Html::encode($this->title) ?>
+    </h1>
 
     <p>
         <?= $accessRules ? Html::a('Create Mahasiswa', ['create'], ['class' => 'btn btn-success']) : null ?>
@@ -36,7 +38,10 @@ $accessRules = $role === User::ROLE_ADMIN;
             'nim',
             'nama',
             'prodi',
-            'pembimbing',
+            [
+                'label' => 'Pembimbing',
+                'attribute' => 'dosen',
+            ],
             'telpon',
             'alamat',
             [

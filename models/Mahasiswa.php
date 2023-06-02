@@ -30,9 +30,9 @@ class Mahasiswa extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['nim', 'nama', 'prodi', 'pembimbing', 'telpon', 'alamat'], 'required'],
+            [['nim', 'nama', 'prodi', 'id_dosen', 'telpon', 'alamat'], 'required'],
             [['nim'], 'string', 'max' => 20],
-            [['nama', 'prodi', 'pembimbing'], 'string', 'max' => 100],
+            [['nama', 'prodi', 'id_dosen'], 'string', 'max' => 100],
             [['telpon'], 'string', 'max' => 15],
             [['alamat'], 'string', 'max' => 200],
         ];
@@ -47,7 +47,7 @@ class Mahasiswa extends \yii\db\ActiveRecord
             'nim' => 'Nim',
             'nama' => 'Nama',
             'prodi' => 'Prodi',
-            'pembimbing' => 'Pembimbing',
+            'id_dosen' => 'Id Dosen',
             'telpon' => 'Telpon',
             'alamat' => 'Alamat',
         ];
@@ -60,5 +60,15 @@ class Mahasiswa extends \yii\db\ActiveRecord
     public static function find()
     {
         return new MahasiswaQuery(get_called_class());
+    }
+
+    public function getDataDosen()
+    {
+        return $this->hasOne(Dosen::className(), ['nip' => 'id_dosen']);
+    }
+
+    public function getDosen()
+    {
+        return $this->dataDosen->nama;
     }
 }

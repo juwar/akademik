@@ -14,10 +14,11 @@ class MahasiswaSearch extends Mahasiswa
     /**
      * {@inheritdoc}
      */
+    public $dosen;
     public function rules()
     {
         return [
-            [['nim', 'nama', 'prodi', 'pembimbing', 'telpon', 'alamat'], 'safe'],
+            [['nim', 'nama', 'prodi', 'id_dosen', 'telpon', 'alamat', 'dosen'], 'safe'],
         ];
     }
 
@@ -37,15 +38,21 @@ class MahasiswaSearch extends Mahasiswa
      *
      * @return ActiveDataProvider
      */
-    public function search($params)
+    public function search($params, $id = null)
     {
-        $query = Mahasiswa::find();
+        $query = $id !== null ? Mahasiswa::find()->andFilterWhere(['like', 'mahasiswa.id_dosen', $id]) : Mahasiswa::find();
 
         // add conditions that should always apply here
+        $query->joinWith(['dataDosen']);
 
         $dataProvider = new ActiveDataProvider([
             'query' => $query,
         ]);
+
+        $dataProvider->sort->attributes['dosen'] = [
+            'asc' => ['dosen.nama' => SORT_ASC],
+            'desc' => ['dosen.nama' => SORT_DESC],
+        ];
 
         $this->load($params);
 
@@ -57,11 +64,13 @@ class MahasiswaSearch extends Mahasiswa
 
         // grid filtering conditions
         $query->andFilterWhere(['like', 'nim', $this->nim])
-            ->andFilterWhere(['like', 'nama', $this->nama])
-            ->andFilterWhere(['like', 'prodi', $this->prodi])
-            ->andFilterWhere(['like', 'pembimbing', $this->pembimbing])
+            ->andFilterWhere(['like', 'mahasiswa.nama', $this->nama])
+            ->andFilterWhere(['like', 'mahasiswa.prodi', $this->prodi])
+            ->andFilterWhere(['like', 'id_dosen', $this->id_dosen])
             ->andFilterWhere(['like', 'telpon', $this->telpon])
-            ->andFilterWhere(['like', 'alamat', $this->alamat]);
+            ->andFilterWhere(['like', 'alamat', $this->alamat])
+            ->andFilterWhere(['like', 'dosen.nama', $this->dosen]);
+        ;
 
         return $dataProvider;
     }

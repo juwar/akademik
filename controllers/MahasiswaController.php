@@ -10,6 +10,7 @@ use yii\filters\VerbFilter;
 use yii\filters\AccessControl;
 use app\models\User;
 use app\components\AccessRule;
+use Yii;
 
 /**
  * MahasiswaController implements the CRUD actions for Mahasiswa model.
@@ -36,7 +37,7 @@ class MahasiswaController extends Controller
                     'ruleConfig' => [
                         'class' => AccessRule::className(),
                     ],
-                    'only' => ['index','create', 'update', 'delete'],
+                    'only' => ['index', 'create', 'update', 'delete'],
                     'rules' => [
                         [
                             'actions' => ['index'],
@@ -71,7 +72,7 @@ class MahasiswaController extends Controller
                                 User::ROLE_ADMIN
                             ],
                         ],
-                   ],
+                    ],
                 ],
             ]
         );
@@ -84,8 +85,9 @@ class MahasiswaController extends Controller
      */
     public function actionIndex()
     {
+        $identity = Yii::$app->user->identity;
         $searchModel = new MahasiswaSearch();
-        $dataProvider = $searchModel->search($this->request->queryParams);
+        $dataProvider = $searchModel->search($this->request->queryParams, User::ROLE_ADMIN ? $identity->id : null);
 
         return $this->render('index', [
             'searchModel' => $searchModel,
@@ -116,7 +118,7 @@ class MahasiswaController extends Controller
         $model = new Mahasiswa();
 
         if ($this->request->isPost) {
-            $newId = strtoupper(substr(uniqid('MH-'),0, 20));
+            $newId = strtoupper(substr(uniqid('MH-'), 0, 20));
             $model->nim = $newId;
             if ($model->load($this->request->post()) && $model->save()) {
                 return $this->redirect(['index']);
