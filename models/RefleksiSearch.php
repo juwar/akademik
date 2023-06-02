@@ -18,7 +18,7 @@ class RefleksiSearch extends Refleksi
     public function rules()
     {
         return [
-            [['id_refleksi', 'nim', 'refleksi_pembimbing', 'mahasiswa'], 'safe'],
+            [['id_refleksi', 'nim', 'refleksi_pembimbing', 'kelemahan', 'kekurangan', 'pencapaian_akademik', 'pencapaian_non_akademik', 'mahasiswa'], 'safe'],
         ];
     }
 
@@ -65,7 +65,11 @@ class RefleksiSearch extends Refleksi
         $query->andFilterWhere(['like', 'id_refleksi', $this->id_refleksi])
             ->andFilterWhere(['like', 'nim', $this->nim])
             ->andFilterWhere(['like', 'refleksi_pembimbing', $this->refleksi_pembimbing])
-            ->andFilterWhere(['like', 'mahasiswa.nama', $this->mahasiswa]);
+            ->andFilterWhere(['like', 'mahasiswa.nama', $this->mahasiswa])
+            ->andFilterWhere(['like', 'kelemahan', $this->kelemahan])
+            ->andFilterWhere(['like', 'kekurangan', $this->kekurangan])
+            ->andFilterWhere(['like', 'pencapaian_akademik', $this->pencapaian_akademik])
+            ->andFilterWhere(['like', 'pencapaian_non_akademik', $this->pencapaian_non_akademik]);
 
         return $dataProvider;
     }

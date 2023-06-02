@@ -9,25 +9,29 @@ use app\models\Mahasiswa;
 /** @var app\models\Refleksi $model */
 
 $this->title = 'Create Refleksi';
-$this->params['breadcrumbs'][] = ['label' => 'Refleksi', 'url' => ['index']];
+$this->params['breadcrumbs'][] = ['label' => 'Refleksis', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
-
 $form = ActiveForm::begin([
     'id' => 'login-form',
     'options' => ['class' => 'form-horizontal'],
 ]);
 $dataListMahasiswa = ArrayHelper::map(Mahasiswa::find()->asArray()->all(), 'nim', 'nama');
+
 ?>
 <div class="refleksi-create">
 
     <h1><?= Html::encode($this->title) ?></h1>
 
-    <?php $form = ActiveForm::begin(); ?>
+      <?php $form = ActiveForm::begin(); ?>
     <?= $form->field($model, 'nim')->dropDownList(
         $dataListMahasiswa,
         ['prompt' => '- Nama -', 'label' => 'Nama']
     )->label('Nama') ?>
     <?= $form->field($model, 'refleksi_pembimbing') ?>
+    <?= $form->field($model, 'kelemahan') ?>
+    <?= $form->field($model, 'kekurangan') ?>
+    <?= $form->field($model, 'pencapaian_akademik') ?>
+    <?= $form->field($model, 'pencapaian_non_akademik') ?>
 
 
     <div class="form-group">

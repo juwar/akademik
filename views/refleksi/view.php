@@ -7,7 +7,7 @@ use yii\widgets\DetailView;
 /** @var app\models\Refleksi $model */
 
 $this->title = $model->id_refleksi;
-$this->params['breadcrumbs'][] = ['label' => 'Refleksi', 'url' => ['index']];
+$this->params['breadcrumbs'][] = ['label' => 'Refleksis', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 \yii\web\YiiAsset::register($this);
 ?>
@@ -32,6 +32,10 @@ $this->params['breadcrumbs'][] = $this->title;
             'id_refleksi',
             'nim',
             'refleksi_pembimbing',
+            'kelemahan',
+            'kekurangan',
+            'pencapaian_akademik',
+            'pencapaian_non_akademik',
         ],
     ]) ?>
 

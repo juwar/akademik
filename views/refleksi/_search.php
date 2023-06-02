@@ -21,6 +21,14 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'refleksi_pembimbing') ?>
 
+    <?= $form->field($model, 'kelemahan') ?>
+
+    <?= $form->field($model, 'kekurangan') ?>
+
+    <?php // echo $form->field($model, 'pencapaian_akademik') ?>
+
+    <?php // echo $form->field($model, 'pencapaian_non_akademik') ?>
+
     <div class="form-group">
         <?= Html::submitButton('Search', ['class' => 'btn btn-primary']) ?>
         <?= Html::resetButton('Reset', ['class' => 'btn btn-outline-secondary']) ?>

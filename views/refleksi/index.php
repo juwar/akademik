@@ -10,7 +10,7 @@ use yii\grid\GridView;
 /** @var app\models\RefleksiSearch $searchModel */
 /** @var yii\data\ActiveDataProvider $dataProvider */
 
-$this->title = 'Refleksi';
+$this->title = 'Refleksis';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="refleksi-index">
@@ -31,13 +31,18 @@ $this->params['breadcrumbs'][] = $this->title;
 
             'id_refleksi',
             'mahasiswa',
+            'nim',
             'refleksi_pembimbing',
+            'kelemahan',
+            'kekurangan',
+            'pencapaian_akademik',
+            'pencapaian_non_akademik',
             [
                 'class' => ActionColumn::className(),
                 'urlCreator' => function ($action, Refleksi $model, $key, $index, $column) {
                     return Url::toRoute([$action, 'id_refleksi' => $model->id_refleksi]);
                  },
-                'template' => $actionButton,
+                 'template' => $actionButton,
             ],
         ],
     ]); ?>

@@ -18,6 +18,14 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'refleksi_pembimbing')->textInput(['maxlength' => true]) ?>
 
+    <?= $form->field($model, 'kelemahan')->textInput(['maxlength' => true]) ?>
+
+    <?= $form->field($model, 'kekurangan')->textInput(['maxlength' => true]) ?>
+
+    <?= $form->field($model, 'pencapaian_akademik')->textInput(['maxlength' => true]) ?>
+
+    <?= $form->field($model, 'pencapaian_non_akademik')->textInput(['maxlength' => true]) ?>
+
     <div class="form-group">
         <?= Html::submitButton('Save', ['class' => 'btn btn-success']) ?>
     </div>

@@ -143,6 +143,7 @@ class RefleksiController extends Controller
             $newId = strtoupper(substr(uniqid('R-'),0, 10));
             $model->id_refleksi = $newId;
             if ($model->load($this->request->post()) && $model->save()) {
+                return $this->redirect(['view', 'id_refleksi' => $model->id_refleksi]);
                 return $this->redirect(['index']);
             }
         } else {
@@ -164,6 +165,26 @@ class RefleksiController extends Controller
     public function actionUpdate($id_refleksi)
     {
         $model = $this->findModel($id_refleksi);
+        $role = Yii::$app->user->identity->role;
+        $actionButton = "";
+        $actionRules = (object) [
+            'admin' => "{view} {update} {delete}", 
+            'dosen' => "{view} {update} {delete}", 
+            'mahasiswa' => ""
+        ];
+        switch($role){
+            case 10:
+                $actionButton = $actionRules->admin;
+                break;
+            case 20:
+                $actionButton = $actionRules->dosen;
+                break;
+            case 30:
+                $actionButton = $actionRules->mahasiswa;
+                break;
+            default:
+                $actionButton = "";
+        }
 
         if ($this->request->isPost && $model->load($this->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id_refleksi' => $model->id_refleksi]);
@@ -171,8 +192,8 @@ class RefleksiController extends Controller
 
         return $this->render('update', [
             'model' => $model,
-            'actionButton' => $actionButton,
-        ]);
+            'actionButton' => $actionButton,      
+          ]);
     }
 
     /**
